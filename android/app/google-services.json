@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "286685624859",
+    "project_id": "flexi-contractor",
+    "storage_bucket": "flexi-contractor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286685624859:android:5c6e050b424b9fcdf4d6be",
+        "android_client_info": {
+          "package_name": "com.sprs.shop.flexi_contractor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286685624859-k3ssstnljj3uio0gpuro209eclheakrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXA42oIOrvP1I1__PK4ThhutqbPfMKEDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286685624859-k3ssstnljj3uio0gpuro209eclheakrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
