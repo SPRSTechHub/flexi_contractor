@@ -20,7 +20,8 @@ class SplashState extends State<Splash> {
     Timer(const Duration(milliseconds: 1000), () {
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            MaterialPageRoute(
+                builder: (context) => const HomeScreen()), //LoginScreen()),
             (route) => false);
       });
     });

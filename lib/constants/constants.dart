@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color white = Colors.white;
 const Color black = Colors.black;
 const Color lightBrown = Color(0xFFCA8243);
+const Color darkBrown = Color(0xFF511504);
 //default app padding
 const double appPadding = 20.0;
 
