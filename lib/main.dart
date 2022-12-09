@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       home: initFirst != true
           ? OnboardingScreenOne()
-          : Splash(
+          : const Splash(
               title: 'Test App',
             ),
     );

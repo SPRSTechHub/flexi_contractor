@@ -1,5 +1,6 @@
 import 'package:flexi_contractor/views/auth/login.dart';
 import 'package:flexi_contractor/views/home/homescreen.dart';
+import 'package:flexi_contractor/views/home/requisitions.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -21,7 +22,7 @@ class SplashState extends State<Splash> {
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-                builder: (context) => const HomeScreen()), //LoginScreen()),
+                builder: (context) => const Requisitions()), //LoginScreen()),
             (route) => false);
       });
     });

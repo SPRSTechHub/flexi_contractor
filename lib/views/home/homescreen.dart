@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/iconic_icons.dart';
-import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:get/get.dart';
 import '../../constants/constants.dart';
+import '../components/navbar.dart';
+import '../const/constant.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,74 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class Navbar extends StatelessWidget {
-  const Navbar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: darkBrown,
-      height: 82,
-      width: Get.width,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    LineariconsFree.menu,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'DASHBOARD',
-                  style: TextStyle(color: Colors.amber, fontSize: 20),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    LineariconsFree.bullhorn,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    LineariconsFree.power_swtich,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class Greetings extends StatelessWidget {
   const Greetings({super.key});
 
@@ -139,8 +69,8 @@ class Greetings extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(50.0)),
               border: Border.all(
-                color: Colors.red,
-                width: 4.0,
+                color: Colors.brown,
+                width: 3.0,
               ),
             ),
             child: ClipOval(
@@ -148,15 +78,20 @@ class Greetings extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 heightFactor: 0.5,
                 child: Image.network(
-                  'https://picsum.photos/seed/637/600',
+                  'https://picsum.photos/200/200',
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          const Text(
-            'data',
-          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('Good Evening,', style: Constant.greetings1),
+              Text('Mr. XYZ', style: Constant.greetings2),
+            ],
+          )
         ],
       ),
     );
@@ -171,32 +106,46 @@ class DashCard extends StatelessWidget {
     return Container(
       width: Get.width * .9,
       height: 118,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-          bottomLeft: Radius.circular(12),
-          bottomRight: Radius.circular(12),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(12),
         ),
         gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
-            colors: [
-              Color.fromRGBO(242, 166, 90, 1),
-              Color.fromRGBO(119, 46, 25, 0.96)
-            ]),
+            colors: Constant.gradientcard1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text(
-              'data',
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('15', style: Constant.greetings1
+//                  style: TextStyle(color: Colors.black87, fontSize: 30),
+                    ),
+                const Text(
+                  'Site Covered',
+                ),
+              ],
             ),
-            Text(
-              'data',
+            const VerticalDivider(color: Colors.white54, thickness: 1),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text(
+                  '15',
+                  style: TextStyle(color: Colors.black87, fontSize: 30),
+                ),
+                Text(
+                  'Site Claimed',
+                ),
+              ],
             ),
           ],
         ),
@@ -210,23 +159,113 @@ class CardButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 160,
-      height: 48,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
+    return SizedBox(
+      width: Get.width * .9,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Buttonshape(
+                icons: const Icon(
+                  Icons.add_shopping_cart_outlined,
+                  color: Colors.white,
+                ),
+                title: 'Requisitions',
+                onPressed: () {
+                  print('object1');
+                },
+              ),
+              Buttonshape(
+                icons: const Icon(
+                  Icons.featured_play_list_outlined,
+                  color: Colors.white,
+                ),
+                title: 'Requisitions',
+                onPressed: () {
+                  print('object2');
+                },
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Buttonshape(
+                icons: const Icon(
+                  Icons.stacked_bar_chart,
+                  color: Colors.white,
+                ),
+                title: 'My Stocks',
+                onPressed: () {
+                  print('object3');
+                },
+              ),
+              Buttonshape(
+                icons: const Icon(
+                  Icons.business_outlined,
+                  color: Colors.white,
+                ),
+                title: 'My Sites',
+                onPressed: () {
+                  print('object4');
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Buttonshape extends StatelessWidget {
+  const Buttonshape(
+      {super.key,
+      required this.onPressed,
+      required this.title,
+      required this.icons});
+
+  final Icon? icons;
+  final String? title;
+  final GestureTapCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 160,
+        height: 48,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(242, 166, 90, 1),
+                Color.fromRGBO(119, 46, 25, 0.96),
+              ]),
         ),
-        gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(242, 166, 90, 1),
-              Color.fromRGBO(119, 46, 25, 0.96),
-            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: icons,
+            ),
+            Text(title.toString(), style: Constant.cardbuttontext)
+          ],
+        ),
       ),
     );
   }
@@ -266,4 +305,7 @@ class Ads extends StatelessWidget {
     );
   }
 }
+
+
+
 /* .... */
