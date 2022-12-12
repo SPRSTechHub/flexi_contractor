@@ -52,6 +52,7 @@ class AddedProducts extends StatelessWidget {
       () => SizedBox(
         height: 600,
         child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: controller.itemsAll.length,
             itemBuilder: (BuildContext context, int index) {
               return CartItemCard(
@@ -121,6 +122,14 @@ class CartTotal extends StatelessWidget {
             Text('Total: ', style: AppTextStyles.kTextStyleElevenThemeColor),
             Text('${controller.ItemTotal}',
                 style: AppTextStyles.kTextStyleElevenThemeColor),
+            /* if (controller.itemsAll.length > 0)
+              {
+                
+              }
+            else
+              {
+                Text('0', style: AppTextStyles.kTextStyleElevenThemeColor),
+              } */
           ],
         ),
       ),

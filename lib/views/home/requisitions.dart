@@ -20,8 +20,8 @@ class _RequisitionsState extends State<Requisitions> {
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  // add dynamic fields
   final formCtl = Get.put(FormCtl());
+  final CartController controller = Get.put(CartController());
 
   @override
   void initState() {
@@ -153,7 +153,12 @@ class _RequisitionsState extends State<Requisitions> {
                       }),
                     ),
                     const SizedBox(height: 10),
-                    Catalouge(),
+                    AddedProducts(),
+                    CartTotal(),
+                    Center(
+                      child: TextButton(
+                          onPressed: () {}, child: const Text('Submit')),
+                    )
                   ],
                 ),
               ),
@@ -164,54 +169,61 @@ class _RequisitionsState extends State<Requisitions> {
           ),
         ),
       ),
-      floatingActionButton: FabCircularMenu(
-          key: fabKey,
-          alignment: Alignment.bottomRight,
-          ringColor: darkBrown.withOpacity(0.3),
-          ringDiameter: 200,
-          ringWidth: 60,
-          fabSize: 64.0,
-          fabElevation: 8.0,
-          fabIconBorder: const CircleBorder(),
-          fabColor: darkBrown,
-          fabOpenIcon: const Icon(Icons.add_home_outlined, color: Colors.white),
-          fabCloseIcon: const Icon(Icons.close, color: Colors.red),
-          children: <Widget>[
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.business_outlined,
-                color: Colors.white,
-              ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: darkBrown,
+        foregroundColor: Colors.white60,
+        mini: true,
+        onPressed: () {
+          openBottomSheet();
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void openBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.bottomRight,
+              colors: Constant.gradientcard1),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Material Lists',
+                  style: AppTextStyles.kTextStyleElevenThemeColor,
+                ),
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(Icons.close_sharp))
+              ],
             ),
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.shopping_cart_checkout_outlined,
-                color: Colors.white,
-              ),
+            Expanded(
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical, child: Catalouge()),
             ),
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-                Get.to(const AddedItem());
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.shopping_bag_outlined,
-                color: Colors.white,
-              ),
-            ),
-          ]),
+          ],
+        ),
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 }
@@ -287,6 +299,58 @@ class Catalouge extends StatelessWidget {
     );
   }
 }
+
+/*
+  floatingActionButton: FabCircularMenu(
+          key: fabKey,
+          alignment: Alignment.bottomRight,
+          ringColor: darkBrown.withOpacity(0.3),
+          ringDiameter: 200,
+          ringWidth: 60,
+          fabSize: 64.0,
+          fabElevation: 8.0,
+          fabIconBorder: const CircleBorder(),
+          fabColor: darkBrown,
+          fabOpenIcon: const Icon(Icons.add_home_outlined, color: Colors.white),
+          fabCloseIcon: const Icon(Icons.close, color: Colors.red),
+          children: <Widget>[
+            RawMaterialButton(
+              onPressed: () {
+                fabKey.currentState?.close();
+              },
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(24.0),
+              child: const Icon(
+                Icons.business_outlined,
+                color: Colors.white,
+              ),
+            ),
+            RawMaterialButton(
+              onPressed: () {
+                fabKey.currentState?.close();
+              },
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(24.0),
+              child: const Icon(
+                Icons.shopping_cart_checkout_outlined,
+                color: Colors.white,
+              ),
+            ),
+            RawMaterialButton(
+              onPressed: () {
+                fabKey.currentState?.close();
+                Get.to(const AddedItem());
+              },
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(24.0),
+              child: const Icon(
+                Icons.shopping_bag_outlined,
+                color: Colors.white,
+              ),
+            ),
+          ]),
+ 
+*/
 
 /*
 Column(

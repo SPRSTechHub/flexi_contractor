@@ -31,9 +31,16 @@ class CartController extends GetxController {
 
   get itemsAll => _item;
 
-  get ItemTotal => _item.entries
+  get ItemTotal => itemsAll.length > 0
+      ? _item.entries
+          .map((item) => item.value)
+          .toList()
+          .reduce((value, element) => value + element)
+          .toString()
+      : 0;
+  /* get ItemTotal => _item.entries
       .map((item) => item.value)
       .toList()
       .reduce((value, element) => value + element)
-      .toString();
+      .toString(); */
 }
