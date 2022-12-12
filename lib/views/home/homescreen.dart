@@ -1,8 +1,10 @@
+import 'package:flexi_contractor/views/home/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/constants.dart';
 import '../components/navbar.dart';
 import '../const/constant.dart';
+import 'requisitions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -177,6 +179,7 @@ class CardButtons extends StatelessWidget {
                 title: 'Requisitions',
                 onPressed: () {
                   print('object1');
+                  Get.to(const RequisitionsT());
                 },
               ),
               Buttonshape(
@@ -187,6 +190,7 @@ class CardButtons extends StatelessWidget {
                 title: 'Requisitions',
                 onPressed: () {
                   print('object2');
+                  Get.to(const Requisitions());
                 },
               )
             ],

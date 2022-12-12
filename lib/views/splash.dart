@@ -22,7 +22,7 @@ class SplashState extends State<Splash> {
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-                builder: (context) => const Requisitions()), //LoginScreen()),
+                builder: (context) => const LoginScreen()), //Requisitions()),
             (route) => false);
       });
     });

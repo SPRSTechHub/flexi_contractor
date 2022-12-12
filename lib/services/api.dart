@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import '../models/rqudata.dart';
 import '../models/sitedata.dart';
 
 class RemoteApiService {
@@ -44,6 +44,27 @@ class RemoteApiService {
         var jsonString = jsonEncode(resp['data']);
         //print(buildingsdataFromJson(jsonString));
         return buildingsdataFromJson(jsonString);
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<RqForm>?> fetchForm(
+      String action, String task_code) async {
+    var postData = {'apiKey': 'sprs', 'action': action, 'task_code': task_code};
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: postData);
+
+    if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+        //print(buildingsdataFromJson(jsonString));
+        return rqFormFromJson(jsonString);
       } else {
         return null;
       }

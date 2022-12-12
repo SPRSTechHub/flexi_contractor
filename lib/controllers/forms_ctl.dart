@@ -1,3 +1,4 @@
+import 'package:flexi_contractor/models/rqudata.dart';
 import 'package:flexi_contractor/models/sitedata.dart';
 import 'package:get/get.dart';
 
@@ -7,11 +8,14 @@ class FormCtl extends GetxController {
   // It is mandatory initialize with one value from listType
   var siteList = <Sitedata>[].obs;
   var buldingList = <Buildingsdata>[].obs;
+  var sampleData = <RqForm>[].obs;
+
   late var selectedBuilding = ''.obs;
   late var selected = ''.obs;
 
   var isDataProcessing = false.obs;
   var isDataProcessing1 = false.obs;
+  var isDataProcessing2 = false.obs;
 
   @override
   void onInit() {
@@ -61,6 +65,19 @@ class FormCtl extends GetxController {
       }
     } finally {
       isDataProcessing(false);
+    }
+  }
+
+  void callForm(var param) async {
+    try {
+      isDataProcessing2(true);
+      var items = await RemoteApiService.fetchForm('get_rq_form', param);
+      if (items != null) {
+        isDataProcessing2(false);
+        sampleData.assignAll(items);
+      }
+    } finally {
+      isDataProcessing2(false);
     }
   }
 

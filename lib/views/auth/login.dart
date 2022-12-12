@@ -1,4 +1,5 @@
 import 'package:flexi_contractor/constants/constants.dart';
+import 'package:flexi_contractor/views/home/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -225,7 +226,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Color.fromRGBO(65, 17, 1, 1),
                           ),
                           child: TextButton(
-                            onPressed: () => {print('object')},
+                            onPressed: () => {
+                              Get.to(const HomeScreen()) //print('object')
+                            },
                             child: const Text(
                               'Continue',
                               textAlign: TextAlign.left,

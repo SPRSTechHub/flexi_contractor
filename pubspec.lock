@@ -64,20 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  dropdown_button2:
-    dependency: "direct main"
-    description:
-      name: dropdown_button2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.9.2"
-  dropdownfield2:
-    dependency: "direct main"
-    description:
-      name: dropdownfield2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
   easy_onboard:
     dependency: "direct main"
     description:

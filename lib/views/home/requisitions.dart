@@ -1,15 +1,11 @@
-// ignore_for_file: use_function_type_syntax_for_parameters
+import 'dart:convert';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdownfield2/dropdownfield2.dart';
 import 'package:flexi_contractor/controllers/forms_ctl.dart';
-import 'package:flexi_contractor/models/sitedata.dart';
-import 'package:flexi_contractor/views/const/constant.dart';
+import 'package:flexi_contractor/services/api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../constants/constants.dart';
 import '../components/navbar.dart';
+import '../const/constant.dart';
 
 class Requisitions extends StatefulWidget {
   const Requisitions({super.key});
@@ -19,27 +15,22 @@ class Requisitions extends StatefulWidget {
 }
 
 class _RequisitionsState extends State<Requisitions> {
-  TextEditingController? textController1;
-  TextEditingController? textController2;
+  TextEditingController name = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  late bool passwordVisibility;
-
+  // add dynamic fields
   final formCtl = Get.put(FormCtl());
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    passwordVisibility = false;
     formCtl.siteListCall('demo1');
+    formCtl.callForm('FLXCTSK1');
   }
 
   @override
   void dispose() {
-    textController1?.dispose();
-    textController2?.dispose();
     super.dispose();
   }
 
@@ -50,134 +41,64 @@ class _RequisitionsState extends State<Requisitions> {
         preferredSize: Size.fromHeight(70),
         child: Navbar(),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: AppStyles.backgrounds,
-        height: Get.height,
-        width: Get.width,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const SizedBox(
-                height: 100,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                height: 700,
-                width: Get.width * .95,
-                decoration: BoxDecoration(
-                  color: Constant.background,
-                  borderRadius: const BorderRadius.all(Radius.circular(18.0)),
-                  border: Border.all(
-                    color: Colors.white60,
-                    width: 0.4,
-                  ),
-                ), //Constant.background,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Obx(
-                      (() {
-                        if (formCtl.isDataProcessing.value == true) {
-                          return const CircularProgressIndicator();
-                        } else {
-                          if (formCtl.siteList.isNotEmpty) {
-                            return SizedBox(
-                              height: 50,
-                              width: Get.width * .85,
-                              child: DropdownButton(
-                                isExpanded: true,
-                                hint: Text("Select Sites",
-                                    style: Constant.cardbuttontext),
-                                style: const TextStyle(color: Colors.white),
-                                focusColor: Colors.black,
-                                items: formCtl.siteList.map((selectedType) {
-                                  return DropdownMenuItem(
-                                    value: selectedType.siteCode,
-                                    child: Text(
-                                      selectedType.siteName.toString(),
-                                      style: Constant.dropdowntext,
-                                    ),
-                                  );
-                                }).toList(),
-                                value: (formCtl.selected.value != '')
-                                    ? formCtl.selected.value
-                                    : null,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    formCtl.getBuildings(newValue!);
-                                    formCtl.setSelected(newValue.toString());
-                                    formCtl.setSelectedBuilding('');
-                                  });
-                                },
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Obx(
+              (() {
+                if (formCtl.isDataProcessing2.value == true) {
+                  return const CircularProgressIndicator();
+                } else {
+                  if (formCtl.sampleData.isNotEmpty) {
+                    //print(formCtl.sampleData.value.toString());
+                    return ListView.builder(
+                      itemCount: formCtl.sampleData.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (ctx, int index) => Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(30.0),
+                            ),
+                            gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: Constant.gradientcard1),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                  child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(formCtl.sampleData[index].itemName),
+                                  Text(formCtl.sampleData[index].itemSize),
+                                  Text(formCtl.sampleData[index].itemType)
+                                ],
+                              )),
+                              IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {},
                               ),
-                            );
-                          } else {
-                            return const Text('No value');
-                          }
-                        }
-                      }),
-                    ),
-                    const SizedBox(height: 10),
-                    Obx(
-                      (() {
-                        if (formCtl.isDataProcessing1.value == true) {
-                          return const CircularProgressIndicator();
-                        } else {
-                          if (formCtl.buldingList.isNotEmpty) {
-                            return SizedBox(
-                              height: 50,
-                              width: Get.width * .85,
-                              child: DropdownButton(
-                                hint: Text("Select Buildings",
-                                    style: Constant.cardbuttontext),
-                                style: const TextStyle(color: Colors.white),
-                                isExpanded: true,
-                                value: (formCtl.selectedBuilding.value != '')
-                                    ? formCtl.selectedBuilding.value
-                                    : null,
-                                items: formCtl.buldingList.map((item) {
-                                  return DropdownMenuItem(
-                                    value: item.buildingCode,
-                                    child: Text(
-                                      item.buildingName.toString(),
-                                      style: Constant.dropdowntext,
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    formCtl.setSelectedBuilding(value!);
-                                  });
-                                },
-                              ),
-                            );
-                          } else {
-                            return Text('No value',
-                                style: Constant.cardbuttontext);
-                          }
-                        }
-                      }),
-                    ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Meterial Items",
-                        style: Constant.dropdowntext,
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                    );
+                  } else {
+                    return const Text('No value');
+                  }
+                }
+              }),
+            ),
+          ],
         ),
       ),
     );
