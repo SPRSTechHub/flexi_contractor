@@ -11,12 +11,9 @@ const Color darkBrown = Color(0xFF511504);
 const double appPadding = 20.0;
 
 class AppColors {
-  var bottomFooterGradient = GetStorage().read('IS_DARK_MODE')
-      ? [const Color.fromRGBO(15, 14, 14, 1), const Color.fromRGBO(0, 0, 0, 1)]
-      : [
-          const Color(0xFF6200EE),
-          Colors.deepPurple.shade300,
-        ];
+  static var gradientBackground = GetStorage().read('IS_DARK_MODE')
+      ? [lightBrown, darkBrown]
+      : [darkBrown, lightBrown];
 
   var kBoxCardGradient = GetStorage().read('IS_DARK_MODE')
       ? [const Color.fromRGBO(13, 13, 13, 1), const Color.fromRGBO(0, 0, 0, 1)]

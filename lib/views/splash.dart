@@ -1,8 +1,9 @@
+import 'package:flexi_contractor/constants/constants.dart';
 import 'package:flexi_contractor/views/auth/login.dart';
-import 'package:flexi_contractor/views/home/homescreen.dart';
-import 'package:flexi_contractor/views/home/requisitions.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import '../constants/constants.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key, required this.title});
@@ -38,10 +39,7 @@ class SplashState extends State<Splash> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Theme.of(context).accentColor,
-            Theme.of(context).primaryColor
-          ],
+          colors: AppColors.gradientBackground,
           begin: const FractionalOffset(0, 0),
           end: const FractionalOffset(1.0, 0.0),
           stops: const [0.0, 1.0],
@@ -60,18 +58,17 @@ class SplashState extends State<Splash> {
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    blurRadius: 2.0,
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 1.0,
                     offset: const Offset(5.0, 3.0),
                     spreadRadius: 2.0,
                   )
                 ]),
             child: const Center(
               child: ClipOval(
-                child: Icon(
-                  Icons.android_outlined,
-                  size: 128,
-                ), //put your logo here
+                child: Image(
+                    image: AssetImage('assets/icon/icon.png'),
+                    fit: BoxFit.fill),
               ),
             ),
           ),
