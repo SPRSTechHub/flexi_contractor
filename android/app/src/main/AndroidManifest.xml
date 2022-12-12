@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sprs.shop.flexi_contractor">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
    <application
         android:label="flexi_contractor"
         android:name="${applicationName}"
