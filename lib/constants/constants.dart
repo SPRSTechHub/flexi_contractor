@@ -46,16 +46,16 @@ class AppColors {
 }
 
 class AppTextStyles {
-  var kTextStyleWithFont = GoogleFonts.montserrat();
-  var kTextStyleWithFont1 = GoogleFonts.cairo;
+  //static var kTextStyleWithFont = TextStyle(color: Colors.amber, fontFamily: GoogleFonts.montserrat());
+  static var kTextStyleWithFont1 = GoogleFonts.cairo;
 
-  var kTextStyleElevenThemeColor = GoogleFonts.cairo(
+  static var kTextStyleElevenThemeColor = GoogleFonts.cairo(
       fontSize: 24,
       color: AppColors().kPrimaryTextColor,
       letterSpacing: 0.5,
       wordSpacing: 20);
 
-  var kTextStyleFourteenWithThemeColor = GoogleFonts.montserrat(
+  static var kTextStyleFourteenWithThemeColor = GoogleFonts.montserrat(
       fontSize: 14, color: AppColors().kPrimaryTextColor);
 
   var kTextStyleTwelveWithGreyColor = GoogleFonts.montserrat(

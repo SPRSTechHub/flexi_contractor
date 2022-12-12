@@ -31,6 +31,7 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   easy_onboard: ^1.0.3
+  fab_circular_menu: ^1.0.2
   firebase_core: ^2.3.0
   flutter:
     sdk: flutter
