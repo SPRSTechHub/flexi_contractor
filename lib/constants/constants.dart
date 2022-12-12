@@ -9,6 +9,7 @@ const Color lightBrown = Color(0xFFCA8243);
 const Color darkBrown = Color(0xFF511504);
 //default app padding
 const double appPadding = 20.0;
+const double appmargin = 10.0;
 
 class AppColors {
   static var gradientBackground = GetStorage().read('IS_DARK_MODE')
