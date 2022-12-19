@@ -3,6 +3,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Constant {
+// Data Storage
+  static final box = GetStorage();
 //Colors
   static var background = GetStorage().read('IS_DARK_MODE')
       ? const Color.fromRGBO(96, 45, 0, 1)

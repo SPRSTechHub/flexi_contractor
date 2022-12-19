@@ -72,4 +72,30 @@ class RemoteApiService {
       return null;
     }
   }
+
+  static Future<dynamic> submitRequisitionForm(String? itemData) async {
+    var jsonBody = {
+      'action': 'add_requitions',
+      'enq_list_items': itemData,
+    };
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+
+    print(response.body);
+
+    /*  if (response.statusCode == 200) {
+      print(response.body);
+      var resp = json.decode(response.body);
+      if (resp['status'] == 0) {
+        var jsonString = jsonEncode(resp['data']);
+
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Failed to submit data.');
+    } */
+  }
 }

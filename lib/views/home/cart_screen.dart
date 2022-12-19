@@ -50,7 +50,7 @@ class AddedProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => SizedBox(
-        height: 600,
+        height: 480,
         child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
             itemCount: controller.itemsAll.length,
@@ -81,11 +81,50 @@ class CartItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(12),
+    return Container(
+      height: 62,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        color: Color.fromARGB(19, 255, 255, 255),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(child: Text(item.itemName)),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.itemName,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold,
+                      height: 1),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Badge(itemS: item.itemSize ?? "xxxx"),
+                    Badge(itemS: item.itemType ?? "xxxx"),
+                    //Text(item.itemType),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
           IconButton(
             onPressed: (() {
               controller.removeProduct(item);
@@ -101,6 +140,48 @@ class CartItemCard extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Badge extends StatelessWidget {
+  String? itemS;
+  Badge({
+    Key? key,
+    required this.itemS,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 24,
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+        boxShadow: [
+          BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.25),
+              offset: Offset(1, 3),
+              blurRadius: 3),
+        ],
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(138, 255, 235, 55),
+              Color.fromARGB(156, 255, 47, 0)
+            ]),
+        //color: Color.fromRGBO(217, 217, 217, 0.11),
+      ),
+      child: Center(
+        child: Text(
+          itemS.toString(),
+          style: const TextStyle(
+              color: Colors.white, fontFamily: 'Inter', fontSize: 10),
+        ),
       ),
     );
   }

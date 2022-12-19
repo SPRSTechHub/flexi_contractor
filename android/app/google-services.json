@@ -29,6 +29,13 @@
             {
               "client_id": "286685624859-k3ssstnljj3uio0gpuro209eclheakrc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "286685624859-1tf5fhpo1nirvullmo7m6sbgkb1uqu0e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sprs.shop.flexiContractor"
+              }
             }
           ]
         }

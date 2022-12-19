@@ -101,6 +101,7 @@ class _RequisitionsState extends State<Requisitions> {
                                   setState(() {
                                     formCtl.getBuildings(newValue!);
                                     formCtl.setSelected(newValue.toString());
+                                    Constant.box.write('site_code', newValue);
                                     formCtl.setSelectedBuilding('');
                                   });
                                 },
@@ -128,7 +129,7 @@ class _RequisitionsState extends State<Requisitions> {
                                 isExpanded: true,
                                 value: (formCtl.selectedBuilding.value != '')
                                     ? formCtl.selectedBuilding.value
-                                    : null, //formCtl.selectedBuilding.value,
+                                    : null,
                                 items: formCtl.buldingList.map((item) {
                                   return DropdownMenuItem(
                                     value: item.buildingCode,
@@ -142,6 +143,7 @@ class _RequisitionsState extends State<Requisitions> {
                                 onChanged: (value) {
                                   setState(() {
                                     formCtl.setSelectedBuilding(value!);
+                                    Constant.box.write('building_code', value);
                                   });
                                 },
                               ),
@@ -156,8 +158,12 @@ class _RequisitionsState extends State<Requisitions> {
                     AddedProducts(),
                     CartTotal(),
                     Center(
-                      child: TextButton(
-                          onPressed: () {}, child: const Text('Submit')),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          controller.formSubmit();
+                        },
+                        child: const Text('Submit Form'),
+                      ),
                     )
                   ],
                 ),
@@ -174,7 +180,21 @@ class _RequisitionsState extends State<Requisitions> {
         foregroundColor: Colors.white60,
         mini: true,
         onPressed: () {
-          openBottomSheet();
+          if (Constant.box.read('site_code') == null) {
+            Get.snackbar('Alert', "Select Site Name!",
+                colorText: Colors.white,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red[500],
+                duration: const Duration(seconds: 1));
+          } else if (Constant.box.read('building_code') == null) {
+            Get.snackbar('Alert', "Select Building Name!",
+                colorText: Colors.white,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red[500],
+                duration: const Duration(seconds: 1));
+          } else {
+            openBottomSheet();
+          }
         },
         child: const Icon(Icons.add),
       ),
@@ -299,114 +319,3 @@ class Catalouge extends StatelessWidget {
     );
   }
 }
-
-/*
-  floatingActionButton: FabCircularMenu(
-          key: fabKey,
-          alignment: Alignment.bottomRight,
-          ringColor: darkBrown.withOpacity(0.3),
-          ringDiameter: 200,
-          ringWidth: 60,
-          fabSize: 64.0,
-          fabElevation: 8.0,
-          fabIconBorder: const CircleBorder(),
-          fabColor: darkBrown,
-          fabOpenIcon: const Icon(Icons.add_home_outlined, color: Colors.white),
-          fabCloseIcon: const Icon(Icons.close, color: Colors.red),
-          children: <Widget>[
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.business_outlined,
-                color: Colors.white,
-              ),
-            ),
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.shopping_cart_checkout_outlined,
-                color: Colors.white,
-              ),
-            ),
-            RawMaterialButton(
-              onPressed: () {
-                fabKey.currentState?.close();
-                Get.to(const AddedItem());
-              },
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(24.0),
-              child: const Icon(
-                Icons.shopping_bag_outlined,
-                color: Colors.white,
-              ),
-            ),
-          ]),
- 
-*/
-
-/*
-Column(
-          children: [
-            Obx(
-              (() {
-                if (formCtl.isDataProcessing2.value == true) {
-                  return const CircularProgressIndicator();
-                } else {
-                  if (formCtl.sampleData.isNotEmpty) {
-                    return ListView.builder(
-                      itemCount: formCtl.sampleData.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (ctx, int index) => Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                            gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: Constant.gradientcard1),
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                  child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(formCtl.sampleData[index].itemName),
-                                  Text(formCtl.sampleData[index].itemSize),
-                                  Text(formCtl.sampleData[index].itemType)
-                                ],
-                              )),
-                              IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const Text('No value');
-                  }
-                }
-              }),
-            ),
-          ],
-        ),
-*/

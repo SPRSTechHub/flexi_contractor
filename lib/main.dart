@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flexi_contractor/views/ob/screen_one.dart';
 import 'package:flexi_contractor/views/splash.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +9,25 @@ import 'firebase_options.dart';
 
 bool? initFirst;
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final fcmToken = await FirebaseMessaging.instance.getToken();
   await GetStorage.init();
   initFirst = GetStorage().read('initFirst');
   GetStorage().write('IS_DARK_MODE', true);
+  GetStorage().write('fcmToken', fcmToken ?? false);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 

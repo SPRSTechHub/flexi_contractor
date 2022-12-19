@@ -3,6 +3,8 @@ import 'package:flexi_contractor/views/home/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../const/constant.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -197,8 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Color.fromRGBO(0, 209, 255, 1),
                                   fontFamily: 'Inter',
                                   fontSize: 12,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                  letterSpacing: 0,
                                   fontWeight: FontWeight.normal,
                                   height: 1),
                             )
@@ -226,8 +227,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Color.fromRGBO(65, 17, 1, 1),
                           ),
                           child: TextButton(
-                            onPressed: () => {
-                              Get.to(const HomeScreen()) //print('object')
+                            onPressed: () {
+                              var fcm = Constant.box.read('fcmToken');
+
+                              //Get.to(const HomeScreen()) //print('object')
                             },
                             child: const Text(
                               'Continue',
@@ -236,8 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Color.fromRGBO(255, 255, 255, 1),
                                   fontFamily: 'Inter',
                                   fontSize: 20,
-                                  letterSpacing:
-                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                  letterSpacing: 0,
                                   fontWeight: FontWeight.normal,
                                   height: 1),
                             ),
